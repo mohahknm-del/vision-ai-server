@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: vision-ai-server
+    env: node
+    region: oregon
+    plan: starter
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: HF_TOKEN
+        sync: false
+      - key: PORT
+        value: 5000

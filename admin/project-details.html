@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تفاصيل المشروع | الرؤيا للمطابخ العصرية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body{font-family:'Tajawal',sans-serif;background:#f5f6fb;color:#1F3A63;}
+    .container{max-width:1100px;margin-top:40px;background:#fff;border-radius:16px;
+      box-shadow:0 4px 15px rgba(31,58,99,.08);padding:30px;}
+    .top-actions{display:flex;gap:10px;justify-content:space-between;align-items:center}
+    .lang-btn{border:1px solid #F05A28;background:transparent;color:#F05A28;border-radius:20px;padding:6px 14px;font-weight:700}
+    .back-btn{border:1px solid #e8ecf3;background:#fff;border-radius:10px;padding:6px 12px}
+    .project-title{border-right:5px solid #F05A28;padding-right:15px;margin:18px 0 14px;font-weight:800}
+    .info span{display:inline-block;background:#f5f6fb;padding:6px 14px;border-radius:10px;margin:5px;font-weight:600;color:#1F3A63}
+    .desc{margin-top:16px;line-height:1.9;font-size:17px;color:#333}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:18px}
+    .gallery img{width:100%;border-radius:10px;transition:.25s}
+    .gallery img:hover{transform:scale(1.04);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+    .btn-whatsapp{background:#25D366;color:#fff;border:none;border-radius:12px;padding:12px 24px;font-size:18px;font-weight:700;display:inline-flex;align-items:center;gap:10px;margin-top:22px;text-decoration:none}
+    .btn-whatsapp:hover{background:#1ebe57;color:#fff}
+    footer{text-align:center;color:#777;margin-top:32px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-actions">
+      <a class="back-btn" href="projects.html"><i class="fas fa-arrow-right"></i> <span id="backTxt">رجوع للمشاريع</span></a>
+      <button class="lang-btn" id="langToggle">EN</button>
+    </div>
+
+    <h2 class="project-title" id="pTitle">—</h2>
+
+    <div class="info">
+      <span id="city"><i class="fas fa-map-marker-alt"></i> —</span>
+      <span id="date"><i class="fas fa-calendar-alt"></i> —</span>
+      <span id="status"><i class="fas fa-circle"></i> —</span>
+      <span id="material"><i class="fas fa-cube"></i> —</span>
+    </div>
+
+    <p class="desc" id="desc">—</p>
+
+    <div class="gallery" id="gallery"></div>
+
+    <a id="waLink" href="#" target="_blank" class="btn-whatsapp">
+      <i class="fab fa-whatsapp"></i> <span id="waTxt">طلب تصميم مشابه</span>
+    </a>
+
+    <footer>© 2025 الرؤيا للمطابخ العصرية - جميع الحقوق محفوظة</footer>
+  </div>
+
+  <script>
+    // 1) قراءة ID من الرابط
+    const params = new URLSearchParams(window.location.search);
+    const idParam = params.get('id');
+
+    // 2) جلب المشاريع من LocalStorage
+    const LS = JSON.parse(localStorage.getItem('projects')) || [];
+
+    // 3) البحث عن المشروع المطلوب
+    const project = LS.find(p => String(p.id) === String(idParam));
+
+    // 4) بيانات افتراضية إذا ماكو مشروع مطابق
+    const fallback = {
+      id: 1,
+      name: "مطبخ لامع – الأبيض الملكي",
+      city: "كركوك",
+      date: "2025-09-10",
+      status: "مكتمل",
+      desc: "مشروع فخم بتنفيذ حديث يجمع بين اللمسة اللامعة والتصميم العصري. تم استخدام مواد عالية الجودة وإضاءة LED مخفية لإبراز جمال التفاصيل.",
+      image: "../images/kitchen1.jpg",
+      material: "MDF + بالون بريس"
+    };
+
+    const data = project || fallback;
+
+    // 5) توليد نص عربي/إنجليزي ديناميكي اعتمادًا على البيانات
+    const T = {
+      ar: {
+        back: "رجوع للمشاريع",
+        title: data.name || "تفاصيل المشروع",
+        city: data.city || "غير محدد",
+        date: (()=>{
+          // إذا التاريخ شكل YYYY-MM-DD، نعرضه حلو
+          const d = (data.date||"").split("-");
+          return d.length===3 ? `${d[0]}-${d[1]}-${d[2]}` : (data.date || "غير محدد");
+        })(),
+        status: data.status || "غير محدد",
+        material: data.material || "MDF",
+        desc: data.desc || "لا توجد تفاصيل لهذا المشروع حالياً.",
+        wa: "طلب تصميم مشابه",
+        waMsg: `مرحباً، أريد تصميم مشابه لمشروع: ${data.name || "—"} 👌`
+      },
+      en: {
+        back: "Back to Projects",
+        title: (data.name_en || data.name || "Project Details"),
+        city: (data.city_en || data.city || "Unknown"),
+        date: (data.date_en || data.date || "Unknown"),
+        status: (data.status_en || data.status || "Unknown"),
+        material: (data.material_en || data.material || "MDF"),
+        desc: (data.desc_en || data.desc || "No details provided for this project yet."),
+        wa: "Request Similar Design",
+        waMsg: `Hello, I want a design similar to: ${data.name_en || data.name || "this project"} 👌`
+      }
+    };
+
+    // 6) صور المعرض (نستخدم الصورة الرئيسية + صور عامة إذا توفر فقط صورة وحدة)
+    const galleryImages = [];
+    if (data.image) galleryImages.push(data.image);
+    // صور إضافية افتراضية لملء المعرض (تقدر تبدلها لاحقاً)
+    const extras = [
+      "../images/kitchen2.jpg",
+      "../images/kitchen3.jpg",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+    ];
+    while (galleryImages.length < 3) {
+      galleryImages.push(extras[galleryImages.length - (data.image?0:0)] || extras[0]);
+    }
+
+    // 7) دالة العرض حسب اللغة
+    let current = 'ar';
+    function render(l){
+      document.documentElement.dir = (l==='ar'?'rtl':'ltr');
+
+      document.getElementById('backTxt').textContent = T[l].back;
+      document.getElementById('pTitle').textContent = T[l].title;
+
+      document.getElementById('city').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${T[l].city}`;
+      // تحويل التاريخ لعرض لطيف بالإنجليزي إذا أردت (اختياري مبسط)
+      const dateTxt = T[l].date;
+      document.getElementById('date').innerHTML = `<i class="fas fa-calendar-alt"></i> ${dateTxt}`;
+      document.getElementById('status').innerHTML = `<i class="fas fa-circle"></i> ${T[l].status}`;
+      document.getElementById('material').innerHTML = `<i class="fas fa-cube"></i> ${T[l].material}`;
+
+      document.getElementById('desc').textContent = T[l].desc;
+
+      const g = document.getElementById('gallery');
+      g.innerHTML = galleryImages.map(src => `<img src="${src}" alt="project image">`).join('');
+
+      const wa = document.getElementById('waLink');
+      wa.href = `https://wa.me/9647700555782?text=${encodeURIComponent(T[l].waMsg)}`;
+      document.getElementById('waTxt').textContent = T[l].wa;
+
+      document.getElementById('langToggle').textContent = (l==='ar'?'EN':'AR');
+    }
+
+    // 8) أول تحميل بالعربي
+    render('ar');
+
+    // 9) تبديل اللغة
+    document.getElementById('langToggle').addEventListener('click', ()=>{
+      current = (current==='ar' ? 'en' : 'ar');
+      render(current);
+    });
+  </script>
+</body>
+</html>

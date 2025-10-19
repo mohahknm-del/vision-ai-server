@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول | الرؤيا للمطابخ العصرية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:#f3f6fb;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    .login-box{
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(31,58,99,.15);
+      padding:40px;
+      width:100%;
+      max-width:420px;
+      text-align:center;
+    }
+    .login-box img{
+      width:90px;
+      margin-bottom:20px;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));
+    }
+    h4{font-weight:800;color:#1F3A63;margin-bottom:20px;}
+    .btn-accent{
+      background:#F05A28;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:12px 16px;
+      font-weight:700;
+      width:100%;
+      transition:.3s;
+    }
+    .btn-accent:hover{background:#d94f22}
+    input, select{
+      border-radius:10px !important;
+    }
+    .lang-btn{
+      position:absolute;
+      top:20px;left:20px;
+      border:1px solid #F05A28;
+      background:transparent;
+      color:#F05A28;
+      border-radius:20px;
+      padding:5px 12px;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+  <button id="langToggle" class="lang-btn">EN</button>
+  <div class="login-box">
+    <img src="../IMG_2491.PNG" alt="Vision Logo">
+    <h4 id="loginTitle">تسجيل الدخول</h4>
+    <form id="loginForm" class="mt-3">
+      <div class="mb-3 text-start">
+        <label class="form-label" id="lblUser">اسم المستخدم</label>
+        <input type="text" id="username" class="form-control" placeholder="مثلاً: admin" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label class="form-label" id="lblPass">كلمة المرور</label>
+        <input type="password" id="password" class="form-control" placeholder="••••••" required>
+      </div>
+      <button type="submit" class="btn-accent" id="btnLogin">تسجيل الدخول</button>
+    </form>
+  </div>
+
+  <script>
+    // تحميل المستخدمين من LocalStorage (أو إنشاء مستخدم مدير افتراضي)
+    let users = JSON.parse(localStorage.getItem('users')) || [
+      {username:'admin', password:'1234', role:'admin'}
+    ];
+
+    // عند تسجيل الدخول
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const username = form.username.value.trim();
+      const password = form.password.value.trim();
+
+      const found = users.find(u => u.username === username && u.password === password);
+      if(found){
+        localStorage.setItem('user', JSON.stringify(found));
+        alert(`✅ مرحباً ${found.username}!`);
+        window.location.href = "dashboard.html";
+      } else {
+        alert("❌ اسم المستخدم أو كلمة المرور غير صحيحة");
+      }
+    });
+
+    // تبديل اللغة
+    const langBtn=document.getElementById('langToggle');
+    let current='ar';
+    const T={
+      ar:{
+        loginTitle:'تسجيل الدخول',
+        lblUser:'اسم المستخدم',
+        lblPass:'كلمة المرور',
+        btnLogin:'تسجيل الدخول'
+      },
+      en:{
+        loginTitle:'Login',
+        lblUser:'Username',
+        lblPass:'Password',
+        btnLogin:'Login'
+      }
+    };
+    function applyLang(l){
+      document.getElementById('loginTitle').textContent=T[l].loginTitle;
+      document.getElementById('lblUser').textContent=T[l].lblUser;
+      document.getElementById('lblPass').textContent=T[l].lblPass;
+      document.getElementById('btnLogin').textContent=T[l].btnLogin;
+      langBtn.textContent=(l==='ar'?'EN':'AR');
+      document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+    }
+    applyLang('ar');
+    langBtn.onclick=()=>{current=(current==='ar'?'en':'ar');applyLang(current);};
+  </script>
+</body>
+</html>

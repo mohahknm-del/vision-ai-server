@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التقارير | الرؤيا للمطابخ العصرية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:#f5f6fb;
+      color:#1F3A63;
+      padding:20px;
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+    }
+    .lang-btn{
+      border:1px solid #F05A28;
+      background:transparent;
+      color:#F05A28;
+      border-radius:20px;
+      padding:6px 14px;
+      font-weight:700;
+    }
+    .cardx{
+      background:#fff;
+      border-radius:18px;
+      box-shadow:0 3px 10px rgba(31,58,99,.07);
+      padding:25px;
+      border:1px solid #e0e5ec;
+      margin-bottom:25px;
+    }
+    h4{
+      border-right:5px solid #F05A28;
+      padding-right:10px;
+      font-weight:800;
+      margin-bottom:20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h3 id="pageTitle">التقارير والتحليلات</h3>
+    <div>
+      <a href="dashboard.html" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> رجوع</a>
+      <button id="langToggle" class="lang-btn">EN</button>
+    </div>
+  </div>
+
+  <!-- الإحصاءات العامة -->
+  <div class="cardx">
+    <h4 id="generalStats">الإحصاءات العامة</h4>
+    <div class="row text-center">
+      <div class="col-md-3">
+        <h6>عدد المشاريع</h6>
+        <h3 id="projectsCount" class="text-primary">0</h3>
+      </div>
+      <div class="col-md-3">
+        <h6>طلبات عرض السعر</h6>
+        <h3 id="quotesCount" class="text-success">0</h3>
+      </div>
+      <div class="col-md-3">
+        <h6>عدد الزبائن</h6>
+        <h3 id="clientsCount" class="text-warning">0</h3>
+      </div>
+      <div class="col-md-3">
+        <h6>قيد التنفيذ</h6>
+        <h3 id="inProgress" class="text-danger">0</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- الرسم البياني الشهري -->
+  <div class="cardx">
+    <h4 id="chartTitle">التطور الشهري</h4>
+    <canvas id="chartMonthly"></canvas>
+  </div>
+
+  <!-- الرسم البياني الدائري -->
+  <div class="cardx">
+    <h4 id="pieTitle">نسبة المشاريع / الطلبات / الزبائن</h4>
+    <canvas id="chartPie"></canvas>
+  </div>
+
+  <script>
+    // تحميل البيانات من LocalStorage
+    const projects = JSON.parse(localStorage.getItem('projects')) || [];
+    const quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+    const clients = JSON.parse(localStorage.getItem('clients')) || [];
+
+    // تعبئة الإحصاءات
+    document.getElementById('projectsCount').textContent = projects.length;
+    document.getElementById('quotesCount').textContent = quotes.length;
+    document.getElementById('clientsCount').textContent = clients.length;
+    const inProgress = projects.filter(p => p.status === 'قيد التنفيذ' || p.status === 'In Progress').length;
+    document.getElementById('inProgress').textContent = inProgress;
+
+    // رسم بياني شهري (بيانات افتراضية)
+    const ctx = document.getElementById('chartMonthly');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+        datasets: [
+          {
+            label: 'المشاريع',
+            data: [2,3,4,5,6,8,10,12,11,9,7,6],
+            borderColor: '#F05A28',
+            fill: false,
+            tension: 0.3
+          },
+          {
+            label: 'الطلبات',
+            data: [1,2,3,4,5,6,7,9,8,7,6,5],
+            borderColor: '#1F3A63',
+            fill: false,
+            tension: 0.3
+          },
+          {
+            label: 'الزبائن',
+            data: [0,1,2,3,5,7,8,9,11,13,14,15],
+            borderColor: '#22c55e',
+            fill: false,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive:true,
+        plugins:{legend:{position:'bottom'}},
+        scales:{y:{beginAtZero:true}}
+      }
+    });
+
+    // رسم بياني دائري
+    const pieCtx = document.getElementById('chartPie');
+    new Chart(pieCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['مشاريع', 'طلبات', 'زبائن'],
+        datasets: [{
+          data: [projects.length, quotes.length, clients.length],
+          backgroundColor: ['#F05A28', '#1F3A63', '#22c55e']
+        }]
+      },
+      options: {
+        plugins:{
+          legend:{position:'bottom'}
+        }
+      }
+    });
+
+    // اللغة
+    const langBtn=document.getElementById('langToggle');
+    let current='ar';
+    const T={
+      ar:{
+        pageTitle:"التقارير والتحليلات",
+        generalStats:"الإحصاءات العامة",
+        chartTitle:"التطور الشهري",
+        pieTitle:"نسبة المشاريع / الطلبات / الزبائن"
+      },
+      en:{
+        pageTitle:"Reports & Analytics",
+        generalStats:"General Statistics",
+        chartTitle:"Monthly Growth",
+        pieTitle:"Projects / Quotes / Clients Ratio"
+      }
+    };
+    function applyLang(l){
+      document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+      document.getElementById('pageTitle').textContent=T[l].pageTitle;
+      document.getElementById('generalStats').textContent=T[l].generalStats;
+      document.getElementById('chartTitle').textContent=T[l].chartTitle;
+      document.getElementById('pieTitle').textContent=T[l].pieTitle;
+      langBtn.textContent=(l==='ar'?'EN':'AR');
+    }
+    applyLang('ar');
+    langBtn.onclick=()=>{current=(current==='ar'?'en':'ar');applyLang(current);};
+  </script>
+</body>
+</html>

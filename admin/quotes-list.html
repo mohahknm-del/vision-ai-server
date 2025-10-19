@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلبات عرض السعر | الرؤيا للمطابخ العصرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:#f4f6fa;
+      color:#1F3A63;
+      padding:20px;
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+    .cardx{
+      background:#fff;
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 3px 10px rgba(31,58,99,.07);
+      border:1px solid #e0e5ec;
+    }
+    .badge-soft{
+      background:#fff;
+      border:1px solid #e0e5ec;
+      border-radius:20px;
+      padding:6px 10px;
+    }
+    .btn-accent{
+      background:#F05A28;
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      padding:8px 14px;
+      font-weight:700;
+    }
+    .btn-accent:hover{background:#d94f22}
+    .lang-btn{
+      border:1px solid #F05A28;
+      background:transparent;
+      color:#F05A28;
+      border-radius:20px;
+      padding:6px 14px;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h3 id="pageTitle">طلبات عرض السعر</h3>
+    <div>
+      <a href="dashboard.html" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> رجوع</a>
+      <button id="langToggle" class="lang-btn">EN</button>
+    </div>
+  </div>
+
+  <div class="cardx">
+    <h5 id="tblTitle" class="mb-3">قائمة الطلبات</h5>
+    <table class="table table-hover align-middle" id="quotesTable">
+      <thead class="table-light">
+        <tr>
+          <th>الاسم</th>
+          <th>الهاتف</th>
+          <th>المدينة</th>
+          <th>النوع</th>
+          <th>التاريخ</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const langBtn = document.getElementById('langToggle');
+    let current = 'ar';
+
+    const T = {
+      ar:{
+        pageTitle:"طلبات عرض السعر",
+        tblTitle:"قائمة الطلبات",
+        thName:"الاسم",
+        thPhone:"الهاتف",
+        thCity:"المدينة",
+        thType:"النوع",
+        thDate:"التاريخ",
+        thActions:"إجراءات"
+      },
+      en:{
+        pageTitle:"Quote Requests",
+        tblTitle:"Requests List",
+        thName:"Name",
+        thPhone:"Phone",
+        thCity:"City",
+        thType:"Type",
+        thDate:"Date",
+        thActions:"Actions"
+      }
+    };
+
+    function applyLang(l){
+      document.documentElement.dir = (l==='ar'?'rtl':'ltr');
+      document.getElementById('pageTitle').textContent = T[l].pageTitle;
+      document.getElementById('tblTitle').textContent = T[l].tblTitle;
+      document.querySelectorAll('#quotesTable thead th')[0].textContent = T[l].thName;
+      document.querySelectorAll('#quotesTable thead th')[1].textContent = T[l].thPhone;
+      document.querySelectorAll('#quotesTable thead th')[2].textContent = T[l].thCity;
+      document.querySelectorAll('#quotesTable thead th')[3].textContent = T[l].thType;
+      document.querySelectorAll('#quotesTable thead th')[4].textContent = T[l].thDate;
+      document.querySelectorAll('#quotesTable thead th')[5].textContent = T[l].thActions;
+      langBtn.textContent = (l==='ar'?'EN':'AR');
+    }
+    applyLang('ar');
+    langBtn.addEventListener('click',()=>{current=(current==='ar'?'en':'ar');applyLang(current);});
+
+    // تحميل الطلبات من LocalStorage
+    let quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+
+    const table = document.querySelector('#quotesTable tbody');
+    function renderQuotes(){
+      table.innerHTML = '';
+      if(quotes.length === 0){
+        table.innerHTML = `<tr><td colspan="6" class="text-center text-muted">لا توجد طلبات حالياً</td></tr>`;
+        return;
+      }
+      quotes.forEach(q=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${q.name}</td>
+          <td>${q.phone}</td>
+          <td>${q.city}</td>
+          <td>${q.type}</td>
+          <td>${q.date}</td>
+          <td>
+            <a href="https://wa.me/9647700555782?text=متابعة%20طلب%20${encodeURIComponent(q.name)}" target="_blank" class="btn btn-outline-success btn-sm"><i class="fab fa-whatsapp"></i></a>
+            <button class="btn btn-outline-danger btn-sm" onclick="deleteQuote(${q.id})"><i class="fas fa-trash"></i></button>
+          </td>
+        `;
+        table.appendChild(tr);
+      });
+    }
+
+    renderQuotes();
+
+    function deleteQuote(id){
+      if(confirm('هل تريد حذف هذا الطلب؟')){
+        quotes = quotes.filter(q => q.id !== id);
+        localStorage.setItem('quotes', JSON.stringify(quotes));
+        renderQuotes();
+      }
+    }
+  </script>
+</body>
+</html>

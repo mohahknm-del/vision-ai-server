@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تفاصيل المشروع | الرؤيا للمطابخ العصرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:#f5f6fb;
+      color:#1F3A63;
+    }
+    .container{
+      max-width:1100px;
+      margin-top:40px;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 4px 15px rgba(31,58,99,.08);
+      padding:30px;
+    }
+    .project-title{
+      border-right:5px solid #F05A28;
+      padding-right:15px;
+      margin-bottom:25px;
+    }
+    .info span{
+      display:inline-block;
+      background:#f5f6fb;
+      padding:6px 14px;
+      border-radius:10px;
+      margin:5px;
+      font-weight:600;
+      color:#1F3A63;
+    }
+    .desc{
+      margin-top:20px;
+      line-height:1.8;
+      font-size:17px;
+      color:#333;
+    }
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:12px;
+      margin-top:20px;
+    }
+    .gallery img{
+      width:100%;
+      border-radius:10px;
+      transition:.3s;
+    }
+    .gallery img:hover{
+      transform:scale(1.05);
+      box-shadow:0 4px 12px rgba(0,0,0,.2);
+    }
+    .btn-whatsapp{
+      background:#25D366;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      padding:12px 24px;
+      font-size:18px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      margin-top:25px;
+      text-decoration:none;
+    }
+    .btn-whatsapp:hover{background:#1ebe57;color:#fff;}
+    footer{
+      text-align:center;
+      color:#777;
+      margin-top:40px;
+    }
+    .lang-btn{
+      border:1px solid #F05A28;
+      background:transparent;
+      color:#F05A28;
+      border-radius:20px;
+      padding:6px 14px;
+      font-weight:700;
+      float:left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="lang-btn" id="langToggle">EN</button>
+    <h2 class="project-title" id="pTitle">مطبخ لامع – الأبيض الملكي</h2>
+    <div class="info">
+      <span id="city"><i class="fas fa-map-marker-alt"></i> كركوك</span>
+      <span id="date"><i class="fas fa-calendar-alt"></i> سبتمبر 2025</span>
+      <span id="status"><i class="fas fa-circle"></i> مكتمل</span>
+      <span id="material"><i class="fas fa-cube"></i> MDF + بالون بريس</span>
+    </div>
+
+    <p class="desc" id="desc">
+      هذا المشروع تم تنفيذه في مدينة كركوك بأسلوب عصري يجمع بين البساطة والأناقة.
+      تم استخدام خامات عالية الجودة من MDF مع لمسات بالون بريس باللون الأبيض اللامع،
+      وتم تنفيذ الإضاءة الداخلية المخفية بتقنية LED لإبراز التفاصيل الجمالية للمطبخ.
+    </p>
+
+    <div class="gallery">
+      <img src="../images/kitchen1.jpg" alt="Project Image 1">
+      <img src="../images/kitchen2.jpg" alt="Project Image 2">
+      <img src="../images/kitchen3.jpg" alt="Project Image 3">
+    </div>
+
+    <a href="https://wa.me/9647700555782?text=مرحباً، أريد تصميم مشابه لمطبخ الأبيض الملكي 👌"
+       target="_blank" class="btn-whatsapp">
+      <i class="fab fa-whatsapp"></i> طلب تصميم مشابه
+    </a>
+
+    <footer>© 2025 الرؤيا للمطابخ العصرية - جميع الحقوق محفوظة</footer>
+  </div>
+
+  <script>
+    const langBtn=document.getElementById('langToggle');
+    let current='ar';
+    const T={
+      en:{
+        title:"Glossy Kitchen – Royal White",
+        city:"Kirkuk",
+        date:"September 2025",
+        status:"Completed",
+        material:"MDF + Membrane Press",
+        desc:"This project was executed in Kirkuk with a modern style combining simplicity and elegance. High-quality MDF materials with glossy white membrane finish were used, with hidden LED lighting to highlight the kitchen’s design details.",
+        button:"Request Similar Design"
+      },
+      ar:{
+        title:"مطبخ لامع – الأبيض الملكي",
+        city:"كركوك",
+        date:"سبتمبر 2025",
+        status:"مكتمل",
+        material:"MDF + بالون بريس",
+        desc:"هذا المشروع تم تنفيذه في مدينة كركوك بأسلوب عصري يجمع بين البساطة والأناقة. تم استخدام خامات عالية الجودة من MDF مع لمسات بالون بريس باللون الأبيض اللامع، وتم تنفيذ الإضاءة الداخلية المخفية بتقنية LED لإبراز التفاصيل الجمالية للمطبخ.",
+        button:"طلب تصميم مشابه"
+      }
+    };
+    function applyLang(l){
+      document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+      document.getElementById('pTitle').textContent=T[l].title;
+      document.getElementById('city').innerHTML=`<i class="fas fa-map-marker-alt"></i> ${T[l].city}`;
+      document.getElementById('date').innerHTML=`<i class="fas fa-calendar-alt"></i> ${T[l].date}`;
+      document.getElementById('status').innerHTML=`<i class="fas fa-circle"></i> ${T[l].status}`;
+      document.getElementById('material').innerHTML=`<i class="fas fa-cube"></i> ${T[l].material}`;
+      document.getElementById('desc').textContent=T[l].desc;
+      document.querySelector('.btn-whatsapp').innerHTML=`<i class="fab fa-whatsapp"></i> ${T[l].button}`;
+      langBtn.textContent=(l==='ar'?'EN':'AR');
+    }
+    applyLang('ar');
+    langBtn.addEventListener('click',()=>{
+      current=(current==='ar'?'en':'ar');
+      applyLang(current);
+    });
+  </script>
+</body>
+</html>

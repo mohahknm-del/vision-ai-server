@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلب تصميم مطبخك | الرؤيا للمطابخ العصرية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover fixed no-repeat;
+      color: #1F3A63;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      background-color: rgba(255,255,255,0.88);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 30px;
+      width: 95%;
+      max-width: 600px;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 800;
+      color: #F05A28;
+      margin-bottom: 25px;
+    }
+
+    label {
+      font-weight: 700;
+      color: #1F3A63;
+    }
+
+    .btn-send {
+      background-color: #F05A28;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      width: 100%;
+      transition: .3s;
+    }
+
+    .btn-send:hover {
+      background-color: #d94f22;
+      transform: scale(1.03);
+    }
+
+    .btn-loc {
+      background: #1F3A63;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 10px;
+      width: 100%;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    select, input {
+      border-radius: 10px !important;
+      border: 1px solid #ccc !important;
+      padding: 10px !important;
+    }
+
+    a.back-home {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #1F3A63;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a.back-home:hover {
+      color: #F05A28;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay">
+    <h2><i class="fas fa-kitchen-set"></i> صمم مطبخك الآن</h2>
+
+    <form id="kitchenForm">
+      <div class="mb-3">
+        <label>🪵 نوع الخشب</label>
+        <select id="wood" class="form-select" required>
+          <option value="">اختر نوع الخشب</option>
+          <option>MDF ألماني</option>
+          <option>HPL تركي</option>
+          <option>بلون بريس</option>
+          <option>خشب طبيعي</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>🎨 اللون</label>
+        <select id="color" class="form-select" required>
+          <option value="">اختر اللون</option>
+          <option>أبيض لامع</option>
+          <option>رمادي فاتح</option>
+          <option>خشبي داكن</option>
+          <option>أسود مطفي</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>🌀 نقش الأبواب</label>
+        <select id="pattern" class="form-select" required>
+          <option value="">اختر النقش</option>
+          <option>سادة مودرن</option>
+          <option>نقش كلاسيكي</option>
+          <option>نقش 3D محفور</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>🏠 الطابق</label>
+        <select id="floor" class="form-select" required>
+          <option value="">اختر الطابق</option>
+          <option>أرضي (كاونتر رئيسي)</option>
+          <option>ملحق (كاونتر إضافي)</option>
+          <option>كلاهما</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label>🪨 نوع المرمر</label>
+        <select id="stone" class="form-select" required>
+          <option value="">اختر نوع المرمر</option>
+          <option>كرارة أبيض</option>
+          <option>أسود غالكسي</option>
+          <option>روز تركي</option>
+          <option>كوارتز حديث</option>
+        </select>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="visit">
+        <label class="form-check-label" for="visit">📏 أرغب بزيارة لقياس المطبخ</label>
+      </div>
+
+      <button type="button" class="btn-loc" onclick="getLocation()">
+        📍 تحديد موقعي الحالي
+      </button>
+
+      <button type="button" class="btn-send mt-3" onclick="sendToWhatsApp()">
+        <i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب
+      </button>
+    </form>
+
+    <a href="../index.html" class="back-home"><i class="fas fa-home"></i> العودة إلى الرئيسية</a>
+  </div>
+
+  <script>
+    let userLocation = '';
+
+    // 🗺️ تحديد الموقع الجغرافي
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const lat = pos.coords.latitude;
+            const lon = pos.coords.longitude;
+            userLocation = `https://www.google.com/maps?q=${lat},${lon}`;
+            alert("✅ تم تحديد موقعك بنجاح!");
+          },
+          () => alert("⚠️ الرجاء السماح بالوصول إلى الموقع الجغرافي.")
+        );
+      } else {
+        alert("❌ المتصفح لا يدعم تحديد الموقع.");
+      }
+    }
+
+    // 💬 إرسال إلى واتساب
+    function sendToWhatsApp() {
+      const wood = document.getElementById('wood').value;
+      const color = document.getElementById('color').value;
+      const pattern = document.getElementById('pattern').value;
+      const floor = document.getElementById('floor').value;
+      const stone = document.getElementById('stone').value;
+      const visit = document.getElementById('visit').checked ? "نعم" : "لا";
+
+      if (!wood || !color || !pattern || !floor || !stone) {
+        alert("⚠️ الرجاء ملء جميع الحقول المطلوبة.");
+        return;
+      }
+
+      const msg =
+        `🧾 *طلب تصميم مطبخ جديد*\n\n` +
+        `🪵 نوع الخشب: ${wood}\n` +
+        `🎨 اللون: ${color}\n` +
+        `🌀 نقش الأبواب: ${pattern}\n` +
+        `🏠 الطابق: ${floor}\n` +
+        `🪨 نوع المرمر: ${stone}\n` +
+        `📏 طلب زيارة قياسات: ${visit}\n` +
+        (userLocation ? `📍 موقعي: ${userLocation}\n` : "") +
+        `\nمرسل من موقع *الرؤيا للمطابخ العصرية*`;
+
+      const phone = "9647700555782";
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>

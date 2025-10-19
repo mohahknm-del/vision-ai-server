@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوحة التحكم | الرؤيا للمطابخ العصرية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root{
+      --primary:#1F3A63;
+      --accent:#F05A28;
+      --bg:#f3f6fb;
+      --card:#ffffff;
+      --line:#e9edf3;
+      --text:#0f172a;
+    }
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+
+    /* 🎬 شاشة التحميل */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #1F3A63, #F05A28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      color: #fff;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.fadeOut {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* باقي تصميم اللوحة */
+    .layout{display:grid;grid-template-columns:1fr 280px;min-height:100vh;}
+    .sidebar{grid-column:2/3;background:var(--primary);color:#fff;padding:20px 18px;position:sticky;top:0;height:100vh;border-left:1px solid rgba(255,255,255,.1);}
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:24px;}
+    .brand img{height:40px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35))}
+    .brand h6{margin:0;font-weight:800}
+    .menu .title{opacity:.8;font-size:.9rem;margin:12px 8px}
+    .menu a{display:flex;align-items:center;gap:10px;color:#e9f0ff;text-decoration:none;padding:10px 12px;border-radius:12px;margin:4px 0;transition:.2s;}
+    .menu a:hover,.menu a.active{background:rgba(255,255,255,.12);color:#fff}
+    .menu a i{width:20px;text-align:center}
+
+    .main{grid-column:1/2;display:flex;flex-direction:column;}
+    .topbar{background:#fff;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5;}
+    .top-actions{display:flex;align-items:center;gap:10px}
+    .btn-ghost{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px}
+    .lang-btn{border:1px solid var(--accent);color:var(--accent);background:transparent;border-radius:22px;padding:8px 14px;font-weight:800}
+    .notif-btn{position:relative;background:transparent;border:none;font-size:1.3rem;color:var(--primary);}
+    .notif-btn span{position:absolute;top:0;right:0;background:#F05A28;color:#fff;font-size:.7rem;padding:2px 5px;border-radius:50%;}
+
+    .wrap{padding:24px}
+    .cards{display:grid;gap:18px;grid-template-columns: repeat(auto-fit,minmax(250px,1fr));}
+    .cardx{
+      background:var(--card);border:1px solid var(--line);
+      border-radius:18px;padding:22px;
+      box-shadow:0 6px 16px rgba(31,58,99,.05);
+      transition:all 0.5s ease;opacity:0;transform:translateY(30px) scale(0.97);
+    }
+    .cardx.show{opacity:1;transform:translateY(0) scale(1);}
+    .greeting{font-size:1.2rem;font-weight:800;color:var(--primary);margin-bottom:20px}
+    .wave-container{position:relative;width:100%;height:120px;overflow:hidden;margin-top:-10px;}
+    .wave-container svg{position:absolute;bottom:0;width:200%;height:100%;animation:waveMove 12s linear infinite;}
+    @keyframes waveMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  </style>
+</head>
+<body>
+
+  <!-- شاشة التحميل -->
+  <div id="loader">
+    <div class="loader-logo">🔸 الرؤيا للمطابخ العصرية 🔸</div>
+    <div class="spinner"></div>
+  </div>
+
+  <div class="layout" id="dashboard" style="display:none;">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="../IMG_2491.PNG" alt="Vision">
+        <h6>لوحة تحكم الرؤيا</h6>
+      </div>
+      <nav class="menu">
+        <div class="title">القائمة</div>
+        <a href="#" class="active"><i class="fas fa-gauge"></i> الرئيسية</a>
+        <a href="projects.html"><i class="fas fa-briefcase"></i> المشاريع</a>
+        <a href="project-details.html"><i class="fas fa-image"></i> تفاصيل مشروع</a>
+        <a href="quote.html"><i class="fas fa-file-signature"></i> نموذج عرض</a>
+        <a href="quotes-list.html"><i class="fas fa-inbox"></i> الطلبات</a>
+        <a href="clients.html"><i class="fas fa-users"></i> الزبائن</a>
+        <a href="reports.html"><i class="fas fa-chart-line"></i> التقارير</a>
+        <a href="users.html"><i class="fas fa-user-cog"></i> إدارة المستخدمين</a>
+        <a href="settings.html"><i class="fas fa-gear"></i> الإعدادات</a>
+        <hr style="border-color:rgba(255,255,255,.15)"/>
+        <a href="../index.html" target="_blank"><i class="fas fa-globe"></i> عرض الموقع</a>
+        <a href="login.html" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> تسجيل الخروج</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="top-actions">
+          <button class="btn-ghost" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+          <strong id="pageTitle">اللوحة الرئيسية</strong>
+        </div>
+        <div class="top-actions">
+          <button class="notif-btn"><i class="fas fa-bell"></i><span>3</span></button>
+          <button class="lang-btn" id="langToggle">EN</button>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="greeting" id="greetText">👋 أهلاً بك في لوحة التحكم</div>
+
+        <div class="cards">
+          <div class="cardx"><div class="k">عدد المشاريع</div><div class="v">12</div></div>
+          <div class="cardx"><div class="k">طلبات عرض السعر</div><div class="v">5</div></div>
+          <div class="cardx"><div class="k">عدد الزبائن</div><div class="v">27</div></div>
+          <div class="cardx"><div class="k">طلبات قيد التنفيذ</div><div class="v">4</div></div>
+        </div>
+
+        <div class="cardx mt-4">
+          <h5>الإحصاءات العامة</h5>
+          <div class="wave-container">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="rgba(240,90,40,0.25)"></path>
+            </svg>
+          </div>
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // شاشة التحميل
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      const dashboard = document.getElementById("dashboard");
+      setTimeout(() => {
+        loader.classList.add("fadeOut");
+        dashboard.style.display = "grid";
+      }, 1200);
+    });
+
+    // حركة الكارتات
+    window.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.cardx');
+      cards.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('show');
+        }, i * 200);
+      });
+    });
+
+    // الرسم البياني
+    const ctx=document.getElementById('chart');
+    new Chart(ctx,{
+      type:'bar',
+      data:{
+        labels:['مشاريع','طلبات','زبائن'],
+        datasets:[{
+          label:'الإحصائيات العامة',
+          data:[12,5,27],
+          backgroundColor:['#F05A28','#1F3A63','#22c55e']
+        }]
+      },
+      options:{
+        scales:{y:{beginAtZero:true}},
+        plugins:{legend:{display:false}}
+      }
+    });
+  </script>
+</body>
+</html>

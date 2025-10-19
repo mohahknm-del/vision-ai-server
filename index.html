@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>الرؤيا للمطابخ العصرية | Vision Modern Kitchens</title>
+
+<!-- Fonts & Frameworks -->
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<style>
+:root{ --brand:#1F3A63; --accent:#F05A28; }
+*{box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:#f4f6fa;color:var(--brand);overflow-x:hidden;scroll-behavior:smooth;}
+
+/* Navbar */
+nav{position:fixed;top:0;width:100%;background:rgba(31,58,99,.2);backdrop-filter:blur(10px);z-index:999;transition:background .35s ease;}
+nav.scrolled{background:var(--brand)!important;}
+.navbar-brand img{height:55px;}
+.navbar-nav .nav-link{color:#fff!important;font-weight:700;margin:0 8px;transition:.25s;}
+.navbar-nav .nav-link:hover{color:var(--accent)!important;}
+
+/* Header */
+header{
+  height:100vh;
+  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.6)),
+  url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+  color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 16px;
+}
+header h1{font-weight:800;font-size:3rem;}
+header p{max-width:760px;font-size:1.15rem;opacity:.9;margin:12px auto 0;}
+.btn-main{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:12px 22px;font-weight:800;text-decoration:none;transition:.25s;display:inline-flex;gap:8px;align-items:center;}
+.btn-main:hover{background:#d94f22;transform:translateY(-1px);}
+section{padding:90px 20px;}
+.highlight{color:var(--accent);font-weight:800;}
+
+/* About */
+#about .content{background:#fff;border-radius:16px;padding:30px;text-align:start;box-shadow:0 8px 24px rgba(0,0,0,.08);line-height:1.9;}
+#about h4{color:var(--accent);margin-top:25px;font-weight:800;}
+#about ul{list-style:square;margin-right:20px;}
+
+/* Cards */
+.type-card{background:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.06);overflow:hidden;transition:.3s;height:100%;}
+.type-card:hover{transform:translateY(-6px);}
+.type-card img{width:100%;height:220px;object-fit:cover;}
+.type-card h5{color:var(--accent);font-weight:800;margin:16px 0 8px;}
+.type-card p{color:#555;padding:0 16px 20px;}
+
+/* Projects */
+.projects h2{
+  font-weight:800;background:linear-gradient(to right,var(--accent),var(--brand));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;
+}
+.projects iframe{width:100%;height:480px;border:0;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+
+/* Calculator */
+.calc-card{background:#fff;border-radius:18px;box-shadow:0 10px 26px rgba(0,0,0,.08);padding:24px;}
+.calc-title{font-weight:800;}
+.result-box{background:#f9fafc;border:1px dashed #cfd6e4;border-radius:14px;padding:18px;text-align:start;}
+
+/* Footer */
+footer{background:var(--brand);color:#fff;text-align:center;padding:28px 10px;}
+footer a{color:var(--accent);text-decoration:none;font-weight:700;}
+footer a:hover{color:#fff;}
+</style>
+</head>
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="IMG_2491.PNG" alt="Vision Logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#">الرئيسية</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">من نحن</a></li>
+        <li class="nav-item"><a class="nav-link" href="#types">أنواع المطابخ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">أعمالنا</a></li>
+        <li class="nav-item"><a class="nav-link" href="#calculator">احسب السعر</a></li>
+        <li class="nav-item"><a class="nav-link" href="#consultation">الاستشارة</a></li>
+        <li class="nav-item"><a class="nav-link" href="#maintenance">الصيانة</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews">آراء</a></li>
+        <li class="nav-item"><a class="nav-link" href="#ai-design">الذكاء الاصطناعي</a></li>
+        <li class="nav-item"><a class="nav-link" href="#location">الموقع</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Header ===== -->
+<header data-aos="fade-down">
+  <div>
+    <h1>الرؤيا للمطابخ العصرية</h1>
+    <p>منذ <span class="highlight">2018</span> نصمم مطابخ تجمع بين <strong>الفخامة</strong> و<strong>الوظيفة</strong> بأعلى جودة.</p>
+    <a href="#calculator" class="btn-main"><i class="fas fa-calculator"></i> احسب سعر مطبخك</a>
+  </div>
+</header>
+
+<!-- ===== About ===== -->
+<section id="about" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center mb-4">من نحن | <span class="highlight">About Us</span></h2>
+    <div class="content">
+      <h4>🏢 قصة التأسيس</h4>
+      <p>تأسست <strong>شركة الرؤيا للمطابخ العصرية</strong> عام 2018 في كركوك، برؤية تهدف لإعادة تعريف المطبخ الحديث في العراق. بدأت الفكرة من شغف بالتصميم والجودة لتصبح اليوم علامة مميزة في عالم المطابخ، بخامات أوروبية وأحدث تقنيات التصنيع (CNC & بالون بريس).</p>
+      <h4>🌟 رؤيتنا</h4>
+      <p>أن نكون الوجهة الأولى للمطابخ العصرية في العراق من خلال تقديم تصميمات فاخرة تجمع بين الجمال والوظيفة والابتكار.</p>
+      <h4>🎯 رسالتنا</h4>
+      <p>نقدم مطابخ تدوم طويلاً تُصنع بشغف من أجود المواد وبأحدث التقنيات لتكون كل زاوية تجربة تجمع بين الأناقة والراحة.</p>
+      <h4>💎 قيمنا</h4>
+      <ul>
+        <li>الجودة أولاً: خامات أصلية ومكائن أوروبية.</li>
+        <li>الشفافية والالتزام مع الزبائن.</li>
+        <li>الابتكار المستمر ومواكبة الموضة العالمية.</li>
+        <li>الاهتمام بالتفاصيل لأن الفخامة تُصنع من التفاصيل الصغيرة.</li>
+        <li>خدمة ما بعد البيع لضمان رضا العملاء الدائم.</li>
+      </ul>
+      <h4>🏆 إنجازاتنا</h4>
+      <p>نفّذنا أكثر من <strong>500 مشروع</strong> في كركوك، بغداد، أربيل، والسليمانية، بمطابخ متنوعة بين المودرن والكلاسيك والنيو كلاسيك. شعارنا الدائم: <strong>“الفخامة تبدأ من التفاصيل”</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Types ===== -->
+<section id="types" style="background:#f9fafc" data-aos="zoom-in">
+  <div class="container">
+    <h2 class="text-center">أنواع المطابخ | <span class="highlight">Kitchen Styles</span></h2>
+    <div class="row g-4 mt-1">
+      <div class="col-md-3"><div class="type-card"><img src="gallery/kitchen1.jpg" alt=""><h5 class="text-center">مودرن</h5><p>بساطة وأناقة بخطوط مستقيمة.</p></div></div>
+      <div class="col-md-3"><div class="type-card"><img src="gallery/kitchen2.jpg" alt=""><h5 class="text-center">كلاسيك</h5><p>فخامة التفاصيل وتشطيبات راقية.</p></div></div>
+      <div class="col-md-3"><div class="type-card"><img src="gallery/kitchen3.jpg" alt=""><h5 class="text-center">نيو كلاسيك</h5><p>مزج بين الحداثة والأصالة.</p></div></div>
+      <div class="col-md-3"><div class="type-card"><img src="gallery/kitchen4.jpg" alt=""><h5 class="text-center">صبغ حراري ألماني</h5><p>جودة ولمعان يدوم لسنوات.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Projects ===== -->
+<section id="projects" class="projects" data-aos="fade-up">
+  <div class="container">
+    <h2 class="text-center">✨ أعمالنا المنجزة — إبداع في كل تفصيل ✨</h2>
+    <div class="row g-4">
+      <div class="col-md-4"><iframe src="https://www.instagram.com/p/DEo-nvNiVMs/embed"></iframe></div>
+      <div class="col-md-4"><iframe src="https://www.instagram.com/p/DEAHSg0C9-p/embed"></iframe></div>
+      <div class="col-md-4"><iframe src="https://www.instagram.com/p/DC6s-lxNW9O/embed"></iframe></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Calculator ===== -->
+<section id="calculator" data-aos="fade-up">
+  <div class="container">
+    <div class="calc-card">
+      <h2 class="calc-title text-center mb-2">💰 احسب سعر مطبخك</h2>
+      <p class="text-center mb-4">أدخل بياناتك وتفاصيل المطبخ لمعرفة السعر التقريبي.</p>
+      <form class="row g-4 justify-content-center">
+        <div class="col-md-3"><label>الاسم الكامل</label><input id="clientName" class="form-control"></div>
+        <div class="col-md-3"><label>رقم الهاتف</label><input id="clientPhone" class="form-control"></div>
+        <div class="col-md-3"><label>العنوان</label><input id="clientAddress" class="form-control"></div>
+        <div class="col-md-3"><label>الطول (متر)</label><input id="length" type="number" step="0.01" class="form-control"></div>
+        <div class="col-md-3"><label>الارتفاع (سم)</label><input id="height" type="number" class="form-control"></div>
+        <div class="col-md-3"><label>نوع المرمر</label>
+          <select id="marbleType" class="form-select">
+            <option value="artificial">مرمر صناعي (75$/م)</option>
+            <option value="quartz">كوارتز طبيعي (150$/م)</option>
+            <option value="porcelain">بورسلين إيطالي (175$/م)</option>
+          </select>
+        </div>
+        <div class="col-md-3"><label>نوع السنك</label>
+          <select id="sinkType" class="form-select">
+            <option value="none">بدون سنك</option>
+            <option value="stainless">ستيل 60سم (75$)</option>
+            <option value="piano">شلال بيانو (200$)</option>
+          </select>
+        </div>
+        <div class="col-md-3"><label>سلة زيوت</label><select id="oilBasket" class="form-select"><option value="no">لا</option><option value="yes">نعم (+50$)</option></select></div>
+        <div class="col-md-3"><label>نوع اليدات</label><select id="handles" class="form-select"><option value="hidden">مخفية</option><option value="visible">ظاهرة (+25$/م)</option></select></div>
+        <div class="col-md-3"><label>مساحة الأبواب (م²)</label><input id="doorArea" type="number" class="form-control"></div>
+        <div class="col-12 text-center"><button type="button" class="btn-main" onclick="calculateKitchen()">احسب السعر</button></div>
+      </form>
+      <div class="row justify-content-center mt-4">
+        <div class="col-lg-8">
+          <div id="result" class="result-box"></div>
+          <div id="afterActions" class="d-flex gap-2 flex-wrap mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Consultation ===== -->
+<section id="consultation" style="background:linear-gradient(135deg,#fff8f3,#f3f6ff);" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-3" style="font-weight:800;color:var(--brand);">💬 احصل على استشارتك المجانية</h2>
+    <p class="mb-5" style="color:#444;font-weight:600;">خدمة الاستشارة متوفرة يوميًا من <span class="highlight">9 صباحًا</span> إلى <span class="highlight">9 مساءً</span> — <strong>مجانًا بالكامل!</strong></p>
+    <div class="row justify-content-center position-relative">
+      <div class="col-lg-8">
+        <div class="bg-white p-4 rounded-4 shadow-lg text-start position-relative">
+          <div class="position-relative" style="z-index:2;">
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label fw-bold">الاسم الكامل</label><input id="consultName" type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label fw-bold">رقم الهاتف</label><input id="consultPhone" type="tel" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label fw-bold">المدينة</label><input id="consultCity" type="text" class="form-control"></div>
+              <div class="col-md-6"><label class="form-label fw-bold">نوع المطبخ أو الاستفسار</label><input id="consultTopic" type="text" class="form-control"></div>
+              <div class="col-12"><label class="form-label fw-bold">رسالتك</label><textarea id="consultMessage" rows="3" class="form-control"></textarea></div>
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn-main" onclick="sendConsultation()"><i class="fab fa-whatsapp"></i> إرسال الاستشارة عبر واتساب</button>
+              <p class="mt-3" style="color:#666;font-size:0.9rem;">⏱️ نقدّر وقتك — وسنرسل لك التصميم المبدئي خلال 24 ساعة مجانًا.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Maintenance ===== -->
+<section id="maintenance" style="background:#fff;" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-4" style="font-weight:800;color:var(--brand);">🛠️ قسم الصيانة</h2>
+    <p class="mb-5" style="color:#555;">هل تحتاج إلى صيانة لمطبخك؟ املأ النموذج وسيتواصل فريقنا معك بأسرع وقت ممكن.</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="bg-light p-4 rounded-4 shadow-sm text-start">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label fw-bold">الاسم الكامل</label><input id="maintName" class="form-control" placeholder="مثلاً: حسين علي"></div>
+            <div class="col-md-6"><label class="form-label fw-bold">رقم الهاتف</label><input id="maintPhone" class="form-control" placeholder="0770xxxxxxx"></div>
+            <div class="col-md-6"><label class="form-label fw-bold">المدينة</label><input id="maintCity" class="form-control" placeholder="كركوك، بغداد..."></div>
+            <div class="col-md-6"><label class="form-label fw-bold">نوع المشكلة</label><input id="maintIssue" class="form-control" placeholder="مثلاً: مفصل مكسور، باب لا يغلق..."></div>
+            <div class="col-12"><label class="form-label fw-bold">ملاحظات إضافية</label><textarea id="maintNote" class="form-control" rows="3"></textarea></div>
+          </div>
+          <div class="text-center mt-4">
+            <button class="btn-main" onclick="sendMaintenance()"><i class="fab fa-whatsapp"></i> إرسال طلب الصيانة</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Reviews ===== -->
+<section id="reviews" style="background:#f9fafc;" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-4" style="font-weight:800;color:var(--brand);">⭐ آراء الزبائن</h2>
+    <p class="mb-5" style="color:#555;">شاركنا رأيك في تجربتك مع شركة الرؤيا للمطابخ العصرية</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="bg-white p-4 rounded-4 shadow-sm text-start">
+          <label class="form-label fw-bold">اسمك</label>
+          <input id="reviewName" class="form-control mb-3" placeholder="اسمك الكريم">
+          <label class="form-label fw-bold">رأيك</label>
+          <textarea id="reviewText" rows="3" class="form-control mb-3" placeholder="أكتب رأيك أو ملاحظتك"></textarea>
+          <div class="text-center">
+            <button class="btn-main" onclick="sendReview()"><i class="fab fa-whatsapp"></i> إرسال رأيي</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI Design (Image Generation) ===== -->
+<section id="ai-design" style="background:linear-gradient(135deg,#f5f9ff,#fff8f4);" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-3" style="font-weight:800;color:var(--brand);">🤖 صمّم مطبخك بالذكاء الاصطناعي</h2>
+    <p class="mb-5" style="color:#444;">أدخل القياسات أدناه، وسينشئ الذكاء الاصطناعي لك تصميم مطبخ واقعي يناسب مساحتك.</p>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="bg-white p-4 rounded-4 shadow-lg text-start position-relative">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label fw-bold">عرض الغرفة (متر)</label><input id="aiWidth" type="number" step="0.1" class="form-control"></div>
+            <div class="col-md-6"><label class="form-label fw-bold">طول الغرفة (متر)</label><input id="aiLength" type="number" step="0.1" class="form-control"></div>
+            <div class="col-md-6"><label class="form-label fw-bold">ارتفاع الغرفة (متر)</label><input id="aiHeight" type="number" step="0.1" class="form-control"></div>
+            <div class="col-md-6"><label class="form-label fw-bold">قياس الكاونتر (متر)</label><input id="aiCounter" type="number" step="0.1" class="form-control"></div>
+          </div>
+          <div class="text-center mt-4">
+            <button class="btn-main" onclick="generateAIDesign()"><i class="fas fa-magic"></i> توليد التصميم</button>
+          </div>
+          <div id="aiResult" class="text-center mt-4 p-3 bg-light rounded-3" style="min-height:150px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Location ===== -->
+<section id="location" style="background:#fff;" data-aos="fade-up">
+  <div class="container text-center">
+    <h2 class="mb-3" style="font-weight:800;color:var(--brand);">📍 موقعنا على الخريطة</h2>
+    <p class="mb-4" style="color:#555;font-weight:600;">كركوك – الماس – مقابل كنيسة مريم العذراء</p>
+    <div class="ratio ratio-16x9 shadow rounded-4 overflow-hidden">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3034.669420281961!2d44.39087137573571!3d35.46807844259569!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4007bff2c2083e5d%3A0x8e7f3b9af0d0f6a7!2z2KzYp9mF2Kkg2KfZhNiz2YrYp9iqINin2YTYp9mEINmF2K3ZhdmG2Kkg2KzYp9mF2Kkg2KfZhNi52KjZiiDYp9mE2YXZiNmK!5e0!3m2!1sar!2siq!4v1719707442705!5m2!1sar!2siq"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="mt-4">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=35.468078,44.390871" target="_blank" class="btn-main">
+        <i class="fas fa-location-arrow"></i> الاتجاه إلى الموقع
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer id="footer">
+  <p>📍 كركوك – الماس – مقابل كنيسة مريم العذراء</p>
+  <p>
+    <a href="https://wa.me/9647700555782"><i class="fab fa-whatsapp"></i> واتساب</a> |
+    <a href="https://www.facebook.com/share/1BSvzdFinJ/?mibextid=wwXIfr"><i class="fab fa-facebook"></i> فيسبوك</a> |
+    <a href="https://www.instagram.com/vizyon750"><i class="fab fa-instagram"></i> إنستغرام</a>
+  </p>
+  <small>© 2018 - 2025 Vision Modern Kitchens — جميع الحقوق محفوظة</small>
+</footer>
+
+<!-- ===== Scripts ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({once:true});
+window.addEventListener("scroll",()=>document.querySelector("nav").classList.toggle("scrolled",window.scrollY>50));
+
+/* ===== Calculator ===== */
+function calculateKitchen(){
+  const name=document.getElementById("clientName").value;
+  const phone=document.getElementById("clientPhone").value;
+  const address=document.getElementById("clientAddress").value;
+  const length=parseFloat(document.getElementById("length").value)||0;
+  const height=parseFloat(document.getElementById("height").value)||0;
+  const marble=document.getElementById("marbleType").value;
+  const sink=document.getElementById("sinkType").value;
+  const basket=document.getElementById("oilBasket").value;
+  const handles=document.getElementById("handles").value;
+  const doorArea=parseFloat(document.getElementById("doorArea").value)||0;
+  const result=document.getElementById("result");
+  const after=document.getElementById("afterActions");
+  if(!name||!phone){result.innerHTML="⚠️ الرجاء إدخال الاسم ورقم الهاتف.";return;}
+  if(length<=0||height<=0){result.innerHTML="⚠️ الرجاء إدخال القياسات بشكل صحيح.";return;}
+
+  const baseMeter=225,baseHeight=220,extraPer10cm=25;
+  const marblePrices={artificial:75,quartz:150,porcelain:175};
+  const sinkPrices={none:0,stainless:75,piano:200};
+  const doorPriceM2=55,handleExtra=25,oilBasketPrice=50;
+  const dollarToIQD=1450;
+
+  const extraCost=Math.floor(Math.max(0,height-baseHeight)/10)*extraPer10cm;
+  let perMeter=baseMeter+extraCost;
+  if(handles==="visible") perMeter+=handleExtra;
+
+  let totalUSD=(length*perMeter)+(length*marblePrices[marble])+sinkPrices[sink];
+  if(basket==="yes") totalUSD+=oilBasketPrice;
+  if(doorArea>0) totalUSD+=(doorArea*doorPriceM2);
+  const totalIQD=Math.round(totalUSD*dollarToIQD);
+
+  result.innerHTML=`<div>💼 السعر التقريبي: <span style="color:var(--accent)">${totalUSD.toFixed(2)}$</span> ≈ ${totalIQD.toLocaleString()} د.ع</div>`;
+  after.innerHTML=`
+    <a class="btn-main" target="_blank"
+      href="https://wa.me/9647700555782?text=${encodeURIComponent(`عرض سعر:
+الاسم: ${name}
+الهاتف: ${phone}
+العنوان: ${address}
+الطول: ${length}م | الارتفاع: ${height}سم
+المرمر: ${marble} | السنك: ${sink}
+سلة زيوت: ${basket} | اليدات: ${handles}
+الأبواب: ${doorArea}م²
+المجموع: ${totalUSD.toFixed(2)}$ ≈ ${totalIQD.toLocaleString()} د.ع`)}">
+      <i class="fab fa-whatsapp"></i> إرسال العرض عبر واتساب
+    </a>`;
+}
+
+/* ===== Consultation ===== */
+function sendConsultation(){
+  const name=document.getElementById("consultName").value.trim();
+  const phone=document.getElementById("consultPhone").value.trim();
+  const city=document.getElementById("consultCity").value.trim();
+  const topic=document.getElementById("consultTopic").value.trim();
+  const msg=document.getElementById("consultMessage").value.trim();
+  if(!name||!phone){alert("⚠️ الرجاء إدخال الاسم ورقم الهاتف.");return;}
+  const text=`💬 استشارة مجانية
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+🏙️ المدينة: ${city||"-"}
+🍽️ نوع المطبخ: ${topic||"-"}
+📝 الرسالة: ${msg||"-"}`;
+  window.open(`https://wa.me/9647700555782?text=${encodeURIComponent(text)}`,"_blank");
+}
+
+/* ===== Maintenance ===== */
+function sendMaintenance(){
+  const n=document.getElementById("maintName").value.trim();
+  const p=document.getElementById("maintPhone").value.trim();
+  const c=document.getElementById("maintCity").value.trim();
+  const i=document.getElementById("maintIssue").value.trim();
+  const note=document.getElementById("maintNote").value.trim();
+  if(!n||!p){alert("⚠️ الرجاء إدخال الاسم ورقم الهاتف.");return;}
+  const t=`🛠️ طلب صيانة
+👤 الاسم: ${n}
+📞 الهاتف: ${p}
+🏙️ المدينة: ${c||"-"}
+⚙️ المشكلة: ${i||"-"}
+📝 ملاحظات: ${note||"-"}`;
+  window.open(`https://wa.me/9647700555782?text=${encodeURIComponent(t)}`,"_blank");
+}
+
+/* ===== Reviews ===== */
+function sendReview(){
+  const n=document.getElementById("reviewName").value.trim();
+  const r=document.getElementById("reviewText").value.trim();
+  if(!n||!r){alert("⚠️ الرجاء إدخال الاسم والرأي.");return;}
+  const t=`⭐ رأي زبون
+👤 الاسم: ${n}
+💬 الرأي: ${r}`;
+  window.open(`https://wa.me/9647700555782?text=${encodeURIComponent(t)}`,"_blank");
+}
+
+/* ===== AI Design: عبر السيرفر المحلي (Hugging Face) ===== */
+async function generateAIDesign() {
+  const w = document.getElementById("aiWidth").value;
+  const l = document.getElementById("aiLength").value;
+  const h = document.getElementById("aiHeight").value;
+  const c = document.getElementById("aiCounter").value;
+  const result = document.getElementById("aiResult");
+
+  if (!w || !l || !h || !c) {
+    result.innerHTML = `<div class="alert alert-warning">⚠️ الرجاء إدخال جميع القياسات بشكل صحيح.</div>`;
+    return;
+  }
+
+  result.innerHTML = "⏳ جاري إنشاء التصميم بالذكاء الاصطناعي...";
+
+  const prompt = `modern luxury kitchen realistic 3d render, Arabic interior style, width ${w}m, length ${l}m, height ${h}m, countertop ${c}m, LED lighting, matte cabinets, marble floor, stainless appliances.`;
+
+  try {
+    // 🔗 استدعاء السيرفر المحلي اللي يولّد الصورة
+    const response = await fetch("https://vision-ai-server-g7tu.onrender.com/generate"
+, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt })
+    });
+
+    if (!response.ok) throw new Error("❌ فشل الاتصال بالسيرفر");
+
+    // 📸 نحول الرد إلى blob (صورة) وننشئ رابط مؤقت لها
+    const blob = await response.blob();
+    const imageUrl = URL.createObjectURL(blob);
+
+    // ✅ عرض الصورة الناتجة بالموقع
+    result.innerHTML = `
+      <img src="${imageUrl}" alt="AI Kitchen Design" class="img-fluid rounded-4 shadow mb-3">
+      <p class="mt-2">
+        <a href="${imageUrl}" download="kitchen.png" class="btn-main"><i class="fas fa-download"></i> تحميل التصميم</a>
+      </p>`;
+  } catch (err) {
+    console.error(err);
+    result.innerHTML = `<div class="alert alert-danger">❌ فشل توليد الصورة. تحقق من أن السيرفر شغال.</div>`;
+  }
+}
+</script>
+</body>
+</html>

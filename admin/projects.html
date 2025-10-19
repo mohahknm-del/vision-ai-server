@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إدارة المشاريع | الرؤيا للمطابخ العصرية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root{
+      --primary:#1F3A63;
+      --accent:#F05A28;
+      --bg:#f4f6fa;
+      --card:#ffffff;
+      --line:#e0e5ec;
+      --text:#0f172a;
+    }
+    body{
+      font-family:'Tajawal',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      padding:20px;
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    }
+    .btn-accent{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:10px 16px;
+      border-radius:10px;
+      font-weight:700;
+    }
+    .cardx{
+      background:var(--card);
+      border-radius:16px;
+      padding:20px;
+      box-shadow:0 3px 10px rgba(31,58,99,.07);
+      border:1px solid var(--line);
+    }
+    .table th, .table td{
+      vertical-align:middle;
+    }
+    .badge-soft{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:6px 10px;
+    }
+    .form-section{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:25px;
+    }
+    .form-section h5{
+      margin-bottom:15px;
+      color:var(--primary);
+      font-weight:800;
+    }
+    .lang-btn{
+      border:1px solid var(--accent);
+      background:transparent;
+      color:var(--accent);
+      border-radius:20px;
+      padding:6px 14px;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h3 id="pageTitle">إدارة المشاريع</h3>
+    <div>
+      <a href="dashboard.html" class="btn btn-secondary"><i class="fas fa-arrow-right"></i> رجوع</a>
+      <button id="langToggle" class="lang-btn">EN</button>
+    </div>
+  </div>
+
+  <!-- نموذج إضافة مشروع -->
+  <div class="form-section">
+    <h5 id="formTitle">إضافة مشروع جديد</h5>
+    <form id="projectForm" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label" id="lblName">اسم المشروع</label>
+        <input type="text" id="name" class="form-control" placeholder="مثال: مطبخ كلاس مودرن">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" id="lblCity">المدينة</label>
+        <input type="text" id="city" class="form-control" placeholder="كركوك">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" id="lblDate">تاريخ التنفيذ</label>
+        <input type="date" id="date" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label" id="lblStatus">الحالة</label>
+        <select id="status" class="form-select">
+          <option value="تصميم">تصميم</option>
+          <option value="قيد التنفيذ">قيد التنفيذ</option>
+          <option value="مكتمل">مكتمل</option>
+        </select>
+      </div>
+      <div class="col-md-12">
+        <label class="form-label" id="lblDesc">وصف المشروع</label>
+        <textarea id="desc" class="form-control" rows="3" placeholder="اكتب وصفاً مختصراً عن المشروع..."></textarea>
+      </div>
+      <div class="col-md-12">
+        <label class="form-label" id="lblImages">رابط صورة (اختياري)</label>
+        <input type="text" id="image" class="form-control" placeholder="مثال: images/kitchen1.jpg">
+      </div>
+      <div class="col-12 text-end">
+        <button type="submit" class="btn-accent" id="btnAdd">إضافة المشروع</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- جدول المشاريع -->
+  <div class="cardx">
+    <h5 id="tblTitle" class="mb-3">قائمة المشاريع</h5>
+    <table class="table table-hover align-middle" id="projectsTable">
+      <thead class="table-light">
+        <tr>
+          <th>اسم المشروع</th>
+          <th>المدينة</th>
+          <th>التاريخ</th>
+          <th>الحالة</th>
+          <th>الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const form=document.getElementById('projectForm');
+    const table=document.getElementById('projectsTable').querySelector('tbody');
+
+    // تحميل المشاريع من LocalStorage
+    let projects=JSON.parse(localStorage.getItem('projects'))||[];
+
+    function renderProjects(){
+      table.innerHTML='';
+      projects.forEach(p=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`
+          <td>${p.name}</td>
+          <td>${p.city}</td>
+          <td>${p.date}</td>
+          <td><span class="badge-soft">${p.status}</span></td>
+          <td>
+            <a href="project-details.html?id=${p.id}" target="_blank" class="btn btn-outline-success btn-sm"><i class="fas fa-eye"></i></a>
+            <button class="btn btn-outline-danger btn-sm" onclick="deleteProject(${p.id})"><i class="fas fa-trash"></i></button>
+          </td>`;
+        table.appendChild(tr);
+      });
+    }
+
+    renderProjects();
+
+    // إضافة مشروع جديد
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const id=Date.now();
+      const name=document.getElementById('name').value.trim();
+      const city=document.getElementById('city').value.trim();
+      const date=document.getElementById('date').value;
+      const status=document.getElementById('status').value;
+      const desc=document.getElementById('desc').value.trim();
+      const image=document.getElementById('image').value.trim() || "../images/kitchen1.jpg";
+      if(!name||!city||!date) return alert('يرجى ملء الحقول الأساسية');
+
+      const newProject={id,name,city,date,status,desc,image};
+      projects.push(newProject);
+      localStorage.setItem('projects',JSON.stringify(projects));
+      renderProjects();
+      form.reset();
+      alert('✅ تم إضافة المشروع بنجاح!');
+    });
+
+    // حذف مشروع
+    function deleteProject(id){
+      if(confirm('هل تريد حذف هذا المشروع؟')){
+        projects=projects.filter(p=>p.id!==id);
+        localStorage.setItem('projects',JSON.stringify(projects));
+        renderProjects();
+      }
+    }
+  </script>
+</body>
+</html>
